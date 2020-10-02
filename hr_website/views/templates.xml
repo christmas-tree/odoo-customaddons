@@ -1,0 +1,72 @@
+<odoo>
+    <data>
+        <template id="listing_employees">
+            <t t-call="website.layout">
+                <title>Employees</title>
+                <h1>Employees</h1>
+                <ul>
+                    <li t-foreach="employees" t-as="employee">
+                        <a t-if="is_admin or employee.id == current_employee_id"
+                           t-attf-href="/employee/employee/#{ employee.id }">
+                            <t t-esc="employee.name"/>
+                        </a>
+                        <p t-else="">
+                            <t t-esc="employee.name"/>
+                        </p>
+                    </li>
+                </ul>
+            </t>
+        </template>
+
+
+        <template id="individual_employee">
+            <t t-call="website.layout">
+                <title>Employees</title>
+                <h1>
+                    <t t-esc="employee.name"/>
+                </h1>
+                <table>
+                    <tbody>
+                        <tr>
+                            <td>Work Phone</td>
+                            <td>
+                                <t t-esc="employee.work_phone"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Work Location</td>
+                            <td>
+                                <t t-esc="employee.work_location"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Department</td>
+                            <td>
+                                <t t-esc="employee.department_id.name"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Manager</td>
+                            <td>
+                                <t t-esc="employee.parent_id.name"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Marital Status</td>
+                            <td>
+                                <t t-esc="employee.marital"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Gender</td>
+                            <td>
+                                <t t-esc="employee.gender"/>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </t>
+        </template>
+
+    </data>
+</odoo>
