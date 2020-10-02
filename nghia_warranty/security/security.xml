@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+
+        <record id="group_advanced_sale_2" model="res.groups">
+            <field name="name">Advanced Sale 2</field>
+        </record>
+    </data>
+</odoo>

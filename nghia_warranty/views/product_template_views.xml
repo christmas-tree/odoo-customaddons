@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="product_template_form_inherit" model="ir.ui.view">
+            <field name="name">product_template_form_inherit</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="product.product_template_only_form_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='barcode']" position="after">
+                    <field name="date_from" groups="nghia_warranty.group_advanced_sale_2"/>
+                    <field name="date_to" groups="nghia_warranty.group_advanced_sale_2"/>
+                    <field name="product_warranty" groups="nghia_warranty.group_advanced_sale_2"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="product_template_treeview_inherit" model="ir.ui.view">
+            <field name="name">product_template_treeview_inherit</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="product.product_template_tree_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='list_price']" position="after">
+                    <field name="warranty_text" readonly="1" optional="show" groups="nghia_warranty.group_advanced_sale_2"/>
+                    <field name="product_warranty" readonly="1" optional="show" groups="nghia_warranty.group_advanced_sale_2"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="mass_warranty_form_view">
+            <field name="name">mass_warranty_form_view</field>
+            <field name="model">warranty.warranty_wizard</field>
+            <field name="arch" type="xml">
+                <form string="Mass update warranty">
+                    <group>
+                        <field name="date_from"/>
+                        <field name="date_to"/>
+                        <field name="product_warranty"/>
+                    </group>
+                    <footer>
+                        <button name="mass_update" string="Update" type="object" class="btn-primary"/>
+                        <button string="Cancel" class="btn-secondary" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <act_window id="launch_the_wizard"
+                    name="Warranty update"
+                    binding_model="product.template"
+                    res_model="warranty.warranty_wizard"
+                    view_mode="form"
+                    groups="nghia_warranty.group_advanced_sale_2"
+                    binding_views="list"
+                    target="new"/>
+    </data>
+</odoo>

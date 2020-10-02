@@ -1,0 +1,35 @@
+<odoo>
+    <data>
+        <record id="sale_order_tree_view_inherit" model="ir.ui.view">
+            <field name="name">sale_order_tree_view_inherit</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_tree"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='amount_total']" position="after">
+                    <field name="calculated_discount_total" sum="Discounted Total" widget="monetary" optional="show"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="sale_order_form_view_inherit" model="ir.ui.view">
+            <field name="name">sale_order_form_view_inherit</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='order_line']/tree/field[@name='qty_delivered']" position="before">
+                    <field name="product_warranty" optional="show"/>
+                    <field name="price_warranty_discounted" readonly="1"/>
+                </xpath>
+
+                <xpath expr="//field[@name='amount_total']" position="after">
+                    <field name="discount_estimated" widget='monetary' options="{'currency_field': 'currency_id'}"/>
+                    <div class="oe_subtotal_footer_separator oe_inline o_td_label">
+                        <label for="calculated_discount_total" />
+                    </div>
+                    <field name="calculated_discount_total" nolabel="1" class="oe_subtotal_footer_separator" widget='monetary' options="{'currency_field': 'currency_id'}"/>
+                </xpath>
+            </field>
+        </record>
+
+    </data>
+</odoo>

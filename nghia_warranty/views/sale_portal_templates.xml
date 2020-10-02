@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="warranty_code" inherit_id="website_sale.cart_lines" active="True" customize_show="True">
+            <xpath expr="//table[@id='cart_products']//thead//tr[1]//th[3]" position="before">
+                 <td class='border-top-0'>
+                     Warranty
+                 </td>
+            </xpath>
+            <xpath expr="//table[@id='cart_products']//tbody//tr[1]//td[3]" position="after">
+                 <td>
+                     <div t-esc="line.product_warranty" />
+                 </td>
+            </xpath>
+        </template>
+    </data>
+</odoo>
